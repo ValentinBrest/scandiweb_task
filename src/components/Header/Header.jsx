@@ -10,6 +10,10 @@ class Header extends Component {
     constructor(props){
         super(props)
     }
+
+    handleClick = (e) => {
+        this.props.giveCurrency(e.target.value)
+    }
     render() {
         const {data = { }} = this.props
         const {categories = [], currencies = []} = data
@@ -27,9 +31,9 @@ class Header extends Component {
                         </ul>
 
                         <div className={cl.wrap}>
-                            <select name="currency" id="" className={cl.currency}>
+                            <select name="currency"  className={cl.currency} onChange={(e) => this.handleClick(e)}>
                                 {currencies.map(cur => (
-                                    <option key={cur.symbol} value={cur.symbol} className={cl.option}>{cur.symbol}</option>
+                                    <option key={cur.symbol} value={cur.symbol} className={cl.option} >{cur.symbol}</option>
                                 ))}
                             </select>
                             <div className={cl.cart}></div>
