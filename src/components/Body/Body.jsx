@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import compose from 'recompose/compose';
 import { useMatcher } from '../../hoc/useMatcher';
 import Header from '../Header/Header';
+import Product from '../Product/Product';
 import cl from './Body.module.css';
-import { PRODUCTS } from './getProduct';
-import Product from './Product/Product';
+import { PRODUCTS_LIST } from './getProductList';
+import ProductList from './ProductList/ProductList';
 
 class Body extends Component {
     
@@ -25,25 +26,27 @@ class Body extends Component {
         const {products = []} = category
         return (
             <div>
-                <Header giveCurrency={this.giveCurrency}/>
+                {/* <Header giveCurrency={this.giveCurrency}/> */}
                 <div className="container">
                     <h1 className={cl.title}>Category name</h1>
 
-                    <div className={cl.product_wrap}>
+                    <div className={cl.body_wrap}>
                         { 
                          products.map( prod => (
-                            <Product key={prod.id} 
+                            <ProductList key={prod.id}
+                                    id={prod.id} 
                                     brand={prod.brand} 
                                     inStock={prod.inStock} 
                                     name={prod.name} 
                                     img={prod.gallery[0]}
                                     price={prod.prices.filter(cur => cur.currency.symbol == this.state.curPrice)[0]}>
-                            </Product>
+                            </ProductList>
                         ))
                         }
                         
                     </div>
                 </div>
+                <Product/>
             </div>
         );
     }
@@ -51,7 +54,7 @@ class Body extends Component {
 
 
 export default compose(useMatcher,
-    graphql(PRODUCTS,{
+    graphql(PRODUCTS_LIST,{
         options: props => ({
           variables: { 
             pic: props.match == null ? 'all': props.match.params.name,

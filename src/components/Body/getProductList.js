@@ -1,6 +1,6 @@
 import {gql} from "@apollo/client";
 
-export const PRODUCTS = gql`
+export const PRODUCTS_LIST = gql`
 query getProducts ($pic: String!) {
   category(input: {title: $pic}) {
    products {

@@ -7,7 +7,7 @@
     margin: 0;
 }
 
-.product_wrap {
+.body_wrap {
     display: grid;
     grid-template-columns: repeat(3, 386px);
     grid-template-rows: 444px;

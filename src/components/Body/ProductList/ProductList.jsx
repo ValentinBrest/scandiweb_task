@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import cl from './Product.module.css'
+import cl from './ProductList.module.css'
 
-class Product extends Component {
+class ProductList extends Component {
     constructor(props) {
         super(props)
     }
     render() {
         return (
-                <div className={cl.prod__wrap}>
-                    <NavLink className={`${cl.product__item}  ${this.props.inStock? '': cl.no__product}`} to={this.props.name}>
+                <div className={cl.prodList__wrap}>
+                    <NavLink className={`${cl.productList__item}  ${this.props.inStock? '': cl.no__product}`} to={this.props.id}>
                         <div className={cl.img__box}>
                             <img className={cl.img__product} src={this.props.img} alt="product" />
                             <div className={cl.green__cart}></div>
@@ -38,4 +38,4 @@ class Product extends Component {
     }
 }
 
-export default Product;
+export default ProductList;
