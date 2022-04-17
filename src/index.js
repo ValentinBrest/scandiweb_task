@@ -28,22 +28,29 @@ client
   .query({
     query: gql`
     query getProducts  {
-		category(input: {title : "all"}) {
-		 products {
-			 id
-			 name
-			 brand
-			 inStock
-			 gallery
-			 prices{
-			   currency{
-			   label
-			   symbol
-			   }
-			   amount
-			 }
-		 }
-	   }
+		product(id : "apple-iphone-12-pro") {
+			id
+			name
+			gallery
+			description
+			attributes{
+			  id
+			  name
+			  type
+			  items {
+				displayValue
+				value
+				id
+			  }
+			}
+			prices {
+			  currency {
+				symbol
+			  }
+			  amount
+			}
+			brand
+		  }
 	   }
     `
   })

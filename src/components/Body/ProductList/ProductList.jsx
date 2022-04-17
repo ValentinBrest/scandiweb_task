@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import cl from './ProductList.module.css'
+import Product from './../../Product/Product'
 
 class ProductList extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ class ProductList extends Component {
     }
     render() {
         return (
-                <div className={cl.prodList__wrap}>
+            <div className={cl.prodList__wrap}>
                     <NavLink className={`${cl.productList__item}  ${this.props.inStock? '': cl.no__product}`} to={this.props.id}>
                         <div className={cl.img__box}>
                             <img className={cl.img__product} src={this.props.img} alt="product" />
@@ -32,8 +33,7 @@ class ProductList extends Component {
                             </div>
                         </div>
                     }
-                </div>
-            
+            </div>  
         );
     }
 }
