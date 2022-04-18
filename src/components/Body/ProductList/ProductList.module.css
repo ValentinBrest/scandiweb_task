@@ -49,11 +49,11 @@
     color: #8D8F9A;
 }
 
-.product__item:hover {
+.productList__item:hover {
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
 
-.product__item:hover .green__cart {
+.productList__item:hover .green__cart {
     opacity: 1;
 }
 

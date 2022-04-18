@@ -18,6 +18,10 @@
     justify-content: space-between;
 }
 
+.img__item {
+    cursor: pointer;
+}
+
 .photo {
     width: 610px;
 }
@@ -25,7 +29,6 @@
 .info {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     width: 292px;
 }
 
@@ -60,82 +63,18 @@
     display: flex;
     padding-bottom: 25px;
 }
-/* .attr__custom {
-    z-index: -1;
-    opacity: 0;
-    display: none;
-} */
-/* .attr__item {
-    width: 63px;
-    height: 45px;
-    border: 1px solid #1D1F22;
-    margin: 0;
-    text-align: center;
-    line-height: 42px;
-} */
-
-/* .attr__custom+label {
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
-  }
-
-.attr__custom+label::before {
-    content: '';
-    display: inline-block;
-    width: 63px;
-    height: 45px;
-    border: 1px solid #1D1F22;
-}
-
-.attr__custom:not(:disabled):not(:checked)+label:hover::before {
-    border-color: #b3d7ff;
-    cursor: pointer;
-  }
-
-.attr__custom:not(:disabled):active+label::before {
-    background-color: #b3d7ff;
-    border-color: #b3d7ff;
-}
-
-.attr__custom:focus+label::before {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-  }
-
-.attr__custom:focus:not(:checked)+label::before {
-    border-color: #80bdff;
-}
-
-.attr__custom:checked+label::before {
-    border-color: #0b76ef;
-    background-color: #0b76ef;
-  }
-.label {
-    position: relative;
-    margin-right: 10px;
-}
-
-.label span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-} */
 
 .price__wrap {
-    height: 75px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 
 .title__price {
+    display: block;
     font-weight: 700;
     font-size: 18px;
     line-height: 18px;
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .amount {
@@ -156,6 +95,12 @@
     border: 0;
     padding: 16px 0;
     margin-bottom: 40px;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.button:hover {
+    opacity: 0.85;
 }
 
 .descr {

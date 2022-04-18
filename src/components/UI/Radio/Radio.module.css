@@ -33,12 +33,16 @@
 
   /* стили для активной радиокнопки (при нажатии на неё) */
   .custom__radio:not(:disabled):active+label::before {
-    background-color: #A6A6A6;
+    background-color: transparent;
+    border-color: #A6A6A6;
+  }
+  .custom__color_radio:not(:disabled):active+label::before {
+    background-color: transparent;
     border-color: #A6A6A6;
   }
 
   /* стили для радиокнопки, находящейся в фокусе */
-  .custom__radio:focus+label::before {
+  .custom__color_radio:focus+label::before {
     box-shadow: 0 0 0 0.2rem #5ECE7B;
   }
 
@@ -52,6 +56,14 @@
     border-color: #1D1F22;
     background-color: #1D1F22;
   }
+
+  .custom__color_radio:checked+label::before {
+    box-shadow: 0 0 0 0.2rem #5ECE7B;
+    border-color: #1D1F22;
+    background-color: transparent;
+  }
+
+  
 
   .custom__radio:checked+label span{
       color: white;

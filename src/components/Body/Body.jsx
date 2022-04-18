@@ -12,11 +12,6 @@ import { PRODUCTS_LIST } from './getProductList';
 class Body extends Component {
     constructor(props) {
         super(props)
-        this.state = { curPrice: '$'}
-    }
-
-    giveCurrency = (curPrice) => {
-        this.setState({curPrice})
     }
 
     render() {
@@ -25,7 +20,6 @@ class Body extends Component {
         const {products = []} = category;
         return (
             <div>
-                {/* <Header giveCurrency={this.giveCurrency}/> */}
                 <div className="container">
                     <h1 className={cl.title}>Category name</h1>
 
@@ -40,7 +34,7 @@ class Body extends Component {
                                         inStock={prod.inStock} 
                                         name={prod.name} 
                                         img={prod.gallery[0]}
-                                        price={prod.prices.filter(cur => cur.currency.symbol == this.state.curPrice)[0]}>
+                                        price={prod.prices.filter(cur => cur.currency.symbol == this.props.symbol)[0]}>
                                     </ProductList>
                                 ))
                         }
