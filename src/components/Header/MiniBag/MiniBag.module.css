@@ -1,0 +1,40 @@
+.minibag {
+    position: absolute;
+    display: block;
+    z-index: 21;
+    right: 0;
+    width: 325px;
+    background: #FFFFFF;
+    padding: 8px 16px 20px;
+}
+
+.title {
+    padding-bottom: 23px;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 35px;
+}
+
+.total span {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.button__wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    font-size: 14px;
+}
+
+.button__view {
+    background: #FFFFFF;
+    color: #1D1F22;
+    border: 1px solid #1D1F22;
+}

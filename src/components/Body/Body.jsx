@@ -19,7 +19,7 @@ class Body extends Component {
         const {category = {}} = data;
         const {products = []} = category;
         return (
-            <div>
+            <div className={cl.wrapper}>
                 <div className="container">
                     <h1 className={cl.title}>Category name</h1>
 
@@ -41,6 +41,11 @@ class Body extends Component {
                         
                     </div>
                 </div>
+                {this.props.isMinibagOpen
+                    ?<div className={cl.overlay}></div>
+                    :''
+                }
+                
             </div>
             
         );

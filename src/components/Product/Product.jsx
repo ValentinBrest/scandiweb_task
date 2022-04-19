@@ -6,13 +6,17 @@ import cl from './Product.module.css';
 import { graphql } from '@apollo/client/react/hoc';
 import { NavLink } from 'react-router-dom';
 import Radio from '../UI/Radio/Radio';
+import { convertInHTML } from '../../utils/convertInHTML';
+import Button from '../UI/Button/Button';
 
 class Product extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { mainImg : null }
+        this.state = { mainImg : null,
+                        attr: {}}
         this.changeImg = this.changeImg.bind(this)
+        this.setAttr = this.setAttr.bind(this)
     }
 
     changeImg (img) {
@@ -20,10 +24,29 @@ class Product extends Component {
             mainImg: img
         })
     }
+
+    setAttr(attr) {
+        this.setState( {...this.state, attr: {...this.state.attr, ...attr}}, () => {})
+    }
+
+    addToCart = (brand, name, symbol, price, gallery, attributesAll) => {
+        let order = {
+            name,
+            brand,
+            symbol,
+            price,
+            attr: this.state.attr,
+            gallery,
+            attributesAll
+        }
+        return this.props.giveToCart(order)
+    }
+
     render() {
         const {data = {}} = this.props;
         const {product = {}} = data
-        const {gallery = [], attributes = []} = product
+        const {gallery = [], attributes = []} = product;
+        const description = convertInHTML(product.description)
         
         return (
             <div className="container">
@@ -48,7 +71,12 @@ class Product extends Component {
                                     <div className={cl.attr__wrap} key={index}>
                                         <span className={cl.title__attr}>{attr.name}:</span>
                                         <div className={cl.attr__box}>{attr.items.map(item => (
-                                            <Radio id={`${item.value}${attr.name}`} name={attr.name} key={`${item.value}${attr.name}`} value={item.value}/>
+                                            <Radio id={`${item.value}${attr.name}`} 
+                                                    name={attr.name} 
+                                                    key={`${item.value}${attr.name}`} 
+                                                    value={item.value}
+                                                    setAttr={this.setAttr}
+                                            />
                                         ))}
                                         </div>
                                     </div>
@@ -64,8 +92,11 @@ class Product extends Component {
                                 </div>
                             </div>
 
-                            <button className={cl.button}>ADD TO CART</button>
+                            <Button className={cl.button} onClick={() => this.addToCart(product.brand, product.name,this.props.symbol, product.prices, gallery, attributes)}>ADD TO CART</Button>                
+                            {/* <button className={cl.button} 
+                            onClick={() => this.addToCart(product.brand, product.name,this.props.symbol, product.prices, gallery, attributes)}>ADD TO CART</button> */}
 
+                                              
                             <div className={cl.descr}>{product.description}</div>
                         </div>
                     </div>

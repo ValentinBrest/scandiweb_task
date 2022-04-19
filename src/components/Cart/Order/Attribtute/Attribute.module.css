@@ -1,0 +1,27 @@
+.attr {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.attr__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 18px;
+    padding-right: 10px;
+}
+
+.attr__value {
+    width: 63px;
+    height: 45px;
+    border: 1px solid #1D1F22;
+    position: relative;
+    font-size: 16px;
+}
+
+.attr__value span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -16,6 +16,7 @@
 .categoties {
     display: flex;
     padding: 0;
+    margin: 0;
 }
 
 .categoties_item {
@@ -88,4 +89,19 @@ option {
     background-image: url('./../../assets/icons/cart.svg');
     background-repeat: no-repeat;
     margin-left: 22px;
+    position: relative;
+}
+
+.prod__total {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #1D1F22;
+    color: #FFFFFF;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    top: -8px;
+    right: -13px;
 }

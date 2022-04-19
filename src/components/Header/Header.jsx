@@ -4,16 +4,23 @@ import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
 import { CATEGORIES_CURRENCIES } from './getCategoties';
 import cl from './Header.module.css';
+import Minibag from './MiniBag/MiniBag';
 
 
 class Header extends Component {
     constructor(props){
         super(props)
+        debugger
+    }
+
+    switchMiniBag = (isMinibagOpen) => {
+        this.props.openMinibag(isMinibagOpen)
     }
 
     handleClick = (e) => {
         this.props.giveCurrency(e.target.value)
     }
+
     render() {
         const {data = { }} = this.props
         const {categories = [], currencies = []} = data
@@ -36,9 +43,24 @@ class Header extends Component {
                                     <option key={cur.symbol} value={cur.symbol} className={cl.option} >{cur.symbol}</option>
                                 ))}
                             </select>
-                            <div className={cl.cart}></div>
+                            {/* <NavLink to='/cart' className={cl.cart} >
+                                {this.props.totalProd > 0? <div className={cl.prod__total}>{this.props.totalProd}</div>: ''}
+                            </NavLink> */}
+                            <div className={cl.cart}  onClick={() => this.switchMiniBag(true)}>
+                                {this.props.totalProd > 0? <div className={cl.prod__total}>{this.props.totalProd}</div>: ''}
+                            </div>
                         </div>
                     </div>
+
+                    {this.props.isMinibagOpen
+                        ?<Minibag orders={this.props.orders} 
+                                symbol={this.props.symbol} 
+                                totalProd={this.props.totalProd}
+                                isMinibagOpen={this.props.isMinibagOpen}    
+                        />
+                        : ''
+                    }
+                    
                 </div>
 
                 <div className={cl.logo} /><div/>
