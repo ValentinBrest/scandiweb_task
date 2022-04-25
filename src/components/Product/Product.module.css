@@ -87,7 +87,7 @@
 
 .button {
     font-size: 16px;
-    margin-bottom: 40px;
+    
 }
 
 .button:hover {
@@ -97,6 +97,19 @@
 .descr {
     font-size: 16px;
     line-height: 159.96%;
+}
+
+.validateBlock{
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.validate {
+    position: absolute;
+    bottom: -25px;
+    color: brown;
+    font-weight: 700;
+    font-size: 18px;
 }
 
 

@@ -6,11 +6,27 @@ import mcl from './MinibagOrder.module.css'
 class Order extends Component {
     constructor(props){
         super(props)
-        this.state = { count: 1}
+        this.state = { count: 1,}
     }
-    increment = () => this.setState({...this.state, count: this.state.count + 1})
+    increment = () => {
+        this.setState({...this.state, count: this.state.count + 1}, () => {
+            this.countTotal((this.props.price.filter(cur => cur.currency.symbol == this.props.symbol)[0].amount))
+        })
+    }
+    
+    decrement = () => {
+        let one = this.state.count - 1 <= 1 ? 1: this.state.count - 1
+        if (this.state.count > 1){
+            this.setState({...this.state, count: one}, () => {
+                this.countTotal(-(this.props.price.filter(cur => cur.currency.symbol == this.props.symbol)[0].amount))
+            })
+        } 
+         
+    }
 
-    decrement = () => this.setState({...this.state, count: this.state.count - 1})
+    countTotal = (total) => {
+        this.props.getTotalAmount(total)
+    }
 
     render() {
         let miniBag = this.props.miniBagOrder
@@ -49,7 +65,7 @@ class Order extends Component {
                         <img src={this.props.gallery[0]} alt="photo" />
                     </div>
                 </div>
-                <button className={miniBag? mcl.button__delete:cl.button__delete}>&times;</button>
+                <button className={miniBag? mcl.button__delete:cl.button__delete} onClick={() => console.log('dd')}>&times;</button>
             </div>
         );
     }

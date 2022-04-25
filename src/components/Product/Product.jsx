@@ -12,9 +12,9 @@ import Button from '../UI/Button/Button';
 class Product extends Component {
     constructor(props) {
         super(props)
-
         this.state = { mainImg : null,
-                        attr: {}}
+                        attr: {},
+                        validate: true}
         this.changeImg = this.changeImg.bind(this)
         this.setAttr = this.setAttr.bind(this)
     }
@@ -30,16 +30,24 @@ class Product extends Component {
     }
 
     addToCart = (brand, name, symbol, price, gallery, attributesAll) => {
-        let order = {
-            name,
-            brand,
-            symbol,
-            price,
-            attr: this.state.attr,
-            gallery,
-            attributesAll
+        if (Object.keys(this.state.attr).length === attributesAll.length){
+            let order = {
+                name,
+                brand,
+                symbol,
+                price,
+                attr: this.state.attr,
+                gallery,
+                attributesAll,
+            }
+            this.setState({...this.state, validate: true})
+            return this.props.giveToCart(order)
+            
+        } else {
+            this.setState({...this.state, validate: false})
         }
-        return this.props.giveToCart(order)
+        
+        
     }
 
     render() {
@@ -47,7 +55,6 @@ class Product extends Component {
         const {product = {}} = data
         const {gallery = [], attributes = []} = product;
         const description = convertInHTML(product.description)
-        
         return (
             <div className="container">
                 <div className={cl.product__wrap}>
@@ -91,7 +98,14 @@ class Product extends Component {
                                 </div>
                             </div>
 
-                            <Button className={cl.button} onClick={() => this.addToCart(product.brand, product.name,this.props.symbol, product.prices, gallery, attributes)}>ADD TO CART</Button>                
+                            <div className={cl.validateBlock}>
+                                <Button className={cl.button} onClick={() => this.addToCart(product.brand, product.name,this.props.symbol, product.prices, gallery, attributes)}>ADD TO CART</Button> 
+                                {!this.state.validate
+                                    ? <div className={cl.validate}>Select all attributes!!!</div>
+                                    : ''
+                                } 
+                            </div>                       
+                                          
                             {/* <button className={cl.button} 
                             onClick={() => this.addToCart(product.brand, product.name,this.props.symbol, product.prices, gallery, attributes)}>ADD TO CART</button> */}
 
