@@ -41,10 +41,6 @@ class Body extends Component {
                         
                     </div>
                 </div>
-                {this.props.isMinibagOpen
-                    ?<div className={cl.overlay}></div>
-                    :''
-                }
                 
             </div>
             

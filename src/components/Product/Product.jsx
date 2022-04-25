@@ -83,7 +83,6 @@ class Product extends Component {
                                 ))}
                                 
                             
-
                             <div className={cl.price__wrap}>
                                 <span className={cl.title__price}>Price:</span>
                                 <div className={cl.amount}>
@@ -97,7 +96,7 @@ class Product extends Component {
                             onClick={() => this.addToCart(product.brand, product.name,this.props.symbol, product.prices, gallery, attributes)}>ADD TO CART</button> */}
 
                                               
-                            <div className={cl.descr}>{product.description}</div>
+                            <div className={cl.descr} dangerouslySetInnerHTML={{__html: product.description}}></div>
                         </div>
                     </div>
                 </div>

@@ -90,6 +90,7 @@ option {
     background-repeat: no-repeat;
     margin-left: 22px;
     position: relative;
+    cursor: pointer;
 }
 
 .prod__total {
@@ -104,4 +105,14 @@ option {
     text-align: center;
     top: -8px;
     right: -13px;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(57, 55, 72, 0.22);
+    left: 0;
+    z-index: 20;
+    cursor: pointer;
 }

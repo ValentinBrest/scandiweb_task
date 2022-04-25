@@ -12,9 +12,9 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = { symbol: '$',
-				   orders: [],
-                   totalProd: 0,
-				   isMinibagOpen: false}    
+					orders: [],
+                   	totalProd: 0,
+					isMinibagOpen: false}    
   }
   
 
@@ -46,14 +46,14 @@ class App extends Component {
         <Routes>
           {categories.map(route => ( 
             <>
-              <Route key={route.name} path={`${route.name}`} element={<Body symbol={this.state.symbol} isMinibagOpen={this.state.isMinibagOpen}/>} />
+              <Route key={route.name} path={`${route.name}`} element={<Body symbol={this.state.symbol} />} />
                 {route.products.map(item => (
                   <Route key={`${route.name}${item.id}`} 
                         path={`${route.name}/${item.id}`} 
-						element={<Product id={item.id} 
-											symbol={this.state.symbol} 
-											giveToCart={this.giveToCart}
-											getTotalProd={this.getTotalProd}
+                        element={<Product id={item.id} 
+                                  symbol={this.state.symbol} 
+                                  giveToCart={this.giveToCart}
+                                  getTotalProd={this.getTotalProd}
 						/>} 
 					/>
                 ))}

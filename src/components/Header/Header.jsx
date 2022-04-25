@@ -10,7 +10,6 @@ import Minibag from './MiniBag/MiniBag';
 class Header extends Component {
     constructor(props){
         super(props)
-        debugger
     }
 
     switchMiniBag = (isMinibagOpen) => {
@@ -32,7 +31,7 @@ class Header extends Component {
                         <ul className={cl.categoties}>
                             {categories.map(item => (
                                 <li key={item.name} className={cl.categoties_item}>
-                                    <NavLink to={item.name}  className={({ isActive }) => isActive ? cl.link_active : ''} >{item.name}</NavLink>
+                                    <NavLink to={item.name}  className={({ isActive }) => isActive ? cl.link_active : '' } onClick={() => this.switchMiniBag(false)}>{item.name}</NavLink>
                                 </li>
                             ))}
                         </ul>
@@ -56,7 +55,7 @@ class Header extends Component {
                         ?<Minibag orders={this.props.orders} 
                                 symbol={this.props.symbol} 
                                 totalProd={this.props.totalProd}
-                                isMinibagOpen={this.props.isMinibagOpen}    
+                                switchMiniBag={this.switchMiniBag}    
                         />
                         : ''
                     }
@@ -64,6 +63,10 @@ class Header extends Component {
                 </div>
 
                 <div className={cl.logo} /><div/>
+                {this.props.isMinibagOpen
+                    ?<div className={cl.overlay} onClick={() => this.switchMiniBag(false)} ></div>
+                    :''
+                }
             </div>
         );
     }

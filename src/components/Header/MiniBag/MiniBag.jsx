@@ -10,6 +10,9 @@ class Minibag extends Component {
         super(props)
         this.state= {miniBagOrder : true}
     }
+    closeMiniBag = () => {
+        this.props.switchMiniBag(false)
+    }
     render() {
         return (
             <div className={cl.minibag}>
@@ -42,7 +45,7 @@ class Minibag extends Component {
                 </div>
 
                 <div className={cl.button__wrap}>
-                    <NavLink to='/cart'>
+                    <NavLink to='/cart' onClick={this.closeMiniBag}>
                         <Button className={`${cl.button} ${cl.button__view}`}>View Bag</Button>
                     </NavLink>
                         <Button className={cl.button}>check out</Button>
