@@ -9,21 +9,21 @@ class Minibag extends Component {
     constructor(props) {
         super(props)
         this.state= {miniBagOrder : true,
-                     totalAmount: +((this.props.orders.
-                        map(item => item.price.
-                        filter(cur => cur.currency.symbol == this.props.symbol)[0].amount)).
-                        reduce(function(a, b){ return a + b}).toFixed(2)),
-                        counters: Array(this.props.orders.length ).fill(1)      
+                    //  totalAmount: this.props.orders.length == 0 
+                    //  ? 0
+                    //  :+((this.props.orders.
+                    //     map(item => item.price.
+                    //     filter(cur => cur.currency.symbol == this.props.symbol)[0].amount)).
+                    //     reduce(function(a, b){ return a + b}).toFixed(2))      
                      }
     }
     closeMiniBag = () => {
         this.props.switchMiniBag(false)
     }
-    getTotalAmount = (total) => {
-        this.setState({...this.state, totalAmount: +((this.state.totalAmount + total).toFixed(2))}, ()=> {})
-    }
+    // getTotalAmount = (total) => {
+    //     this.setState({...this.state, totalAmount: +((this.state.totalAmount + total).toFixed(2))}, ()=> {})
+    // }
     render() {
-        console.log(this.state.counters);
         return (
             <div className={cl.minibag}>
                 <div className={cl.title}>
@@ -45,16 +45,17 @@ class Minibag extends Component {
                             attr={order.attr}
                             gallery={order.gallery}
                             miniBagOrder={this.state.miniBagOrder}
-                            getTotalAmount={this.getTotalAmount}
-                            totalAmount={this.state.totalAmount}
-                            count = {this.state.counters[index]}
+                            count={this.props.counters[index]}
+                            addInCounters={this.props.addInCounters}
+                            index={index}
+                            totalAmount={this.props.totalAmount}
                     />
                     ))}
                 </div>
 
                 <div className={cl.total}>
                     <span>Total</span>
-                    <span>{this.state.totalAmount}{this.props.symbol}</span>
+                    <span>{this.props.totalAmount}{this.props.symbol}</span>
                 </div>
 
                 <div className={cl.button__wrap}>

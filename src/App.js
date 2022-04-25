@@ -13,24 +13,38 @@ class App extends Component {
     super(props)
     this.state = { symbol: '$',
 					orders: [],
-                   	totalProd: 0,
-					isMinibagOpen: false}    
+					counters: {},
+					totalProd: 0,
+					isMinibagOpen: false,
+					totalAmount: 0,  
+        }    
   }
   
-
   openMinibag = (isMinibagOpen) => {
-	  this.setState({...this.state, isMinibagOpen: isMinibagOpen})
+	  this.setState({...this.state, isMinibagOpen: isMinibagOpen}, () => {
+		  console.log(this.state.counters );
+	  })
   } 
 
   giveToCart = (order) => {
-	  this.setState({...this.state, orders: [...this.state.orders, order], totalProd: (this.state.totalProd + 1)}, ()=>{
-		console.log(this.state)
-	  })
+	  this.setState({...this.state, 
+                    orders: [...this.state.orders, order], 
+                    totalProd: (this.state.totalProd + 1), 
+                    counters: {...this.state.counters, [this.state.orders.length]: 1},
+					totalAmount: +((this.state.totalAmount + order.price.filter(cur => cur.currency.symbol == this.state.symbol)[0].amount).toFixed(2))
+				}, ()=>{})
   } 
 
   giveCurrency = (symbol) => {
     this.setState({symbol})
 }
+  addInCounters = (counter, index, count) => {
+    this.setState({...this.state, counters: {...this.state.counters, [index]: counter}, totalAmount: +((this.state.totalAmount + count).toFixed(2))}, () => {
+		console.log(this.state.counters);
+	})
+    
+  }
+  
   render() {
     const {data = { }} = this.props
     const {categories = []} = data;
@@ -41,7 +55,10 @@ class App extends Component {
 				orders={this.state.orders} 
 				symbol={this.state.symbol}
 				isMinibagOpen={this.state.isMinibagOpen}
-				openMinibag={this.openMinibag}	
+				openMinibag={this.openMinibag}
+				counters={this.state.counters}
+				addInCounters={this.addInCounters}
+				totalAmount={this.state.totalAmount}
 		/>
         <Routes>
           {categories.map(route => ( 
@@ -60,7 +77,8 @@ class App extends Component {
               
             </>
           ))}
-         <Route path="cart" element={<Cart orders={this.state.orders} symbol={this.state.symbol} />}/>         
+         <Route path="cart" element={<Cart orders={this.state.orders} symbol={this.state.symbol} counters={this.state.counters}
+				addInCounters={this.addInCounters}/>}/>         
         </Routes>
     </div>
     );

@@ -23,11 +23,7 @@ class Header extends Component {
     render() {
         const {data = { }} = this.props
         const {categories = [], currencies = []} = data;
-        // if (this.props.isMinibagOpen){
-        //     document.body.style.overflow = "hidden"
-        // } else {
-        //     document.body.style.overflow = "unset"
-        // }
+        
         return (
             <>
             <div className={cl.header}>
@@ -61,7 +57,10 @@ class Header extends Component {
                     ?<Minibag orders={this.props.orders} 
                             symbol={this.props.symbol} 
                             totalProd={this.props.totalProd}
-                            switchMiniBag={this.switchMiniBag}    
+                            switchMiniBag={this.switchMiniBag} 
+                            addInCounters={this.props.addInCounters} 
+                            counters={this.props.counters} 
+                            totalAmount={this.props.totalAmount}
                     />
                     : ''
                 }
