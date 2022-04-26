@@ -15,15 +15,15 @@ class App extends Component {
 					orders: [],
 					counters: {},
 					totalProd: 0,
-					isMinibagOpen: false,
-					totalAmount: 0,  
+					isMinibagOpen: false, 
+          totalPrice: {},
+          totalAmount: 0
         }    
   }
   
   openMinibag = (isMinibagOpen) => {
-	  this.setState({...this.state, isMinibagOpen: isMinibagOpen}, () => {
-		  console.log(this.state.counters );
-	  })
+    let totalAmount = this.sumSalaries(this.state.totalPrice)
+	  this.setState({...this.state, isMinibagOpen: isMinibagOpen, totalAmount: totalAmount}, () => {})
   } 
 
   giveToCart = (order) => {
@@ -31,20 +31,40 @@ class App extends Component {
                     orders: [...this.state.orders, order], 
                     totalProd: (this.state.totalProd + 1), 
                     counters: {...this.state.counters, [this.state.orders.length]: 1},
-					totalAmount: +((this.state.totalAmount + order.price.filter(cur => cur.currency.symbol == this.state.symbol)[0].amount).toFixed(2))
-				}, ()=>{})
+                    totalPrice: {...this.state.totalPrice, [this.state.orders.length]: order.price.filter(cur => cur.currency.symbol == this.state.symbol)[0].amount}
+        }, () => {})
   } 
 
+
   giveCurrency = (symbol) => {
-    this.setState({symbol})
+    this.setState({...this.state, symbol},() => {
+    })
 }
-  addInCounters = (counter, index, count) => {
-    this.setState({...this.state, counters: {...this.state.counters, [index]: counter}, totalAmount: +((this.state.totalAmount + count).toFixed(2))}, () => {
-		console.log(this.state.counters);
-	})
-    
+  addInCounters = (counter, index, price) => {
+    this.setState({...this.state, 
+                  counters: {...this.state.counters, [index]: counter}, 
+                  totalPrice: {...this.state.totalPrice, [index]: price},
+                  
+                }, () => {this.setState({totalAmount: this.sumSalaries(this.state.totalPrice)}, () => {})})
   }
-  
+
+  updateOrders = (index, price) => {
+          this.state.orders.splice(index, 1, null)
+          delete this.state.counters[index]
+          delete this.state.totalPrice[index]
+          this.setState({...this.state, 
+            orders: this.state.orders, 
+            totalProd: (this.state.totalProd - 1), 
+            counters: {...this.state.counters},
+            totalPrice: {...this.state.totalPrice},
+            totalAmount: this.state.totalAmount - price
+      }, ()=>{})
+  }
+
+  sumSalaries(salaries) {
+    return Object.values(salaries).reduce((a, b) => a + b, 0)
+  }
+
   render() {
     const {data = { }} = this.props
     const {categories = []} = data;
@@ -58,7 +78,8 @@ class App extends Component {
 				openMinibag={this.openMinibag}
 				counters={this.state.counters}
 				addInCounters={this.addInCounters}
-				totalAmount={this.state.totalAmount}
+        updateOrders={this.updateOrders}
+        totalAmount={this.state.totalAmount}
 		/>
         <Routes>
           {categories.map(route => ( 
@@ -78,7 +99,7 @@ class App extends Component {
             </>
           ))}
          <Route path="cart" element={<Cart orders={this.state.orders} symbol={this.state.symbol} counters={this.state.counters}
-				addInCounters={this.addInCounters}/>}/>         
+				addInCounters={this.addInCounters} updateOrders={this.updateOrders}/>}/>         
         </Routes>
     </div>
     );

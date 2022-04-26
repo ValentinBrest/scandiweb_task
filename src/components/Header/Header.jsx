@@ -20,6 +20,8 @@ class Header extends Component {
         this.props.giveCurrency(e.target.value)
     }
 
+    
+
     render() {
         const {data = { }} = this.props
         const {categories = [], currencies = []} = data;
@@ -60,6 +62,7 @@ class Header extends Component {
                             switchMiniBag={this.switchMiniBag} 
                             addInCounters={this.props.addInCounters} 
                             counters={this.props.counters} 
+                            updateOrders={this.props.updateOrders}
                             totalAmount={this.props.totalAmount}
                     />
                     : ''

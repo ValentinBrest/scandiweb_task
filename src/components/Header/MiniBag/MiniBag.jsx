@@ -8,21 +8,14 @@ import cl from './MiniBag.module.css';
 class Minibag extends Component {
     constructor(props) {
         super(props)
-        this.state= {miniBagOrder : true,
-                    //  totalAmount: this.props.orders.length == 0 
-                    //  ? 0
-                    //  :+((this.props.orders.
-                    //     map(item => item.price.
-                    //     filter(cur => cur.currency.symbol == this.props.symbol)[0].amount)).
-                    //     reduce(function(a, b){ return a + b}).toFixed(2))      
-                     }
+        this.state= {miniBagOrder : true,}
     }
     closeMiniBag = () => {
         this.props.switchMiniBag(false)
     }
-    // getTotalAmount = (total) => {
-    //     this.setState({...this.state, totalAmount: +((this.state.totalAmount + total).toFixed(2))}, ()=> {})
-    // }
+
+    
+    
     render() {
         return (
             <div className={cl.minibag}>
@@ -35,8 +28,9 @@ class Minibag extends Component {
                 </div>
 
                 <div className={cl.bag_prod}>
-                    {this.props.orders.map((order, index) => (
-                        <Order key={index}
+                    {this.props.orders.map((order, index) => {
+                        if (order) {
+                           return <Order key={index}
                             brand={order.brand} 
                             name={order.name} 
                             symbol={this.props.symbol} 
@@ -48,9 +42,13 @@ class Minibag extends Component {
                             count={this.props.counters[index]}
                             addInCounters={this.props.addInCounters}
                             index={index}
-                            totalAmount={this.props.totalAmount}
+                            updateOrders={this.props.updateOrders}
                     />
-                    ))}
+                        }
+                    }
+                        
+                        
+                    )}
                 </div>
 
                 <div className={cl.total}>
