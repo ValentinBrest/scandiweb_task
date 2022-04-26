@@ -2,6 +2,7 @@
 import { graphql } from '@apollo/client/react/hoc';
 import React, { Component } from 'react';
 import { NavLink } from "react-router-dom";
+import Seclect from '../UI/Select/Seclect';
 import { CATEGORIES_CURRENCIES } from './getCategoties';
 import cl from './Header.module.css';
 import Minibag from './MiniBag/MiniBag';
@@ -16,9 +17,9 @@ class Header extends Component {
         this.props.openMinibag(isMinibagOpen)
     }
 
-    handleClick = (e) => {
-        this.props.giveCurrency(e.target.value)
-    }
+    // handleClick = (e) => {
+    //     this.props.giveCurrency(e.target.value)
+    // }
 
     
 
@@ -41,11 +42,12 @@ class Header extends Component {
                     </ul>
 
                     <div className={cl.wrap}>
-                        <select name="currency"  className={cl.currency} onChange={(e) => this.handleClick(e)}>
+                        {/* <select name="currency"  className={cl.currency} onChange={(e) => this.handleClick(e)}>
                             {currencies.map(cur => (
                                 <option key={cur.symbol} value={cur.symbol} className={cl.option} >{cur.symbol}</option>
                             ))}
-                        </select>
+                        </select> */}
+                        <Seclect currencies={currencies} getCurrency={this.props.getCurrency} symbol={this.props.symbol}/>
                         {/* <NavLink to='/cart' className={cl.cart} >
                             {this.props.totalProd > 0? <div className={cl.prod__total}>{this.props.totalProd}</div>: ''}
                         </NavLink> */}

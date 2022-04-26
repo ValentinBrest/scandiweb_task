@@ -36,7 +36,7 @@ class App extends Component {
   } 
 
 
-  giveCurrency = (symbol) => {
+  getCurrency = (symbol) => {
     this.setState({...this.state, symbol},() => {
     })
 }
@@ -62,7 +62,7 @@ class App extends Component {
   }
 
   sumSalaries(salaries) {
-    return Object.values(salaries).reduce((a, b) => a + b, 0)
+    return (Object.values(salaries).reduce((a, b) => a + b, 0)).toFixed(2)
   }
 
   render() {
@@ -70,7 +70,7 @@ class App extends Component {
     const {categories = []} = data;
     return (
       <div className="App">
-        <Header giveCurrency={this.giveCurrency} 
+        <Header getCurrency={this.getCurrency} 
 				totalProd={this.state.totalProd} 
 				orders={this.state.orders} 
 				symbol={this.state.symbol}
