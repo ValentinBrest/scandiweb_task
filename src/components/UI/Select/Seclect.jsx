@@ -10,26 +10,27 @@ class Seclect extends Component {
         this.setState({isSelectOpen: isSelectOpen})
     }
 
-    // componentDidMount() {
-    //     document.addEventListener('mousedown', this.closeSelect);
-    //     console.log('didmount');
-    //   }
+    componentDidMount() {
+        document.addEventListener('mousedown', this.closeSelect);
+        console.log('did');
+      }
     
-    // componentWillUnmount() {
-    //     document.removeEventListener('mousedown', this.closeSelect);
-    //     console.log('willunmount');
-    // }
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.closeSelect);
+        console.log('will');
+    }
 
 
     handleClick = (symbol) => {
         this.props.getCurrency(symbol)
         this.toggleSelect(false)
-        console.log('ffff');
     }
 
-    closeSelect = () => {
-        this.setState({isSelectOpen: false})
-    }
+    
+
+    // closeSelect = () => {
+    //     this.setState({isSelectOpen: true})
+    // }
 
     render() {
         return (
@@ -49,11 +50,20 @@ class Seclect extends Component {
                     this.state.isSelectOpen
                     ? <div className={cl.body}>
                     {this.props.currencies.map(cur => 
-                        <div className={cl.item} key={cur.symbol} onClick={() => {this.handleClick(cur.symbol)}}><span>{cur.symbol}</span><span>{cur.label}</span></div>
+                        <div className={cl.item} key={cur.symbol} onClick={() => this.handleClick(cur.symbol)}><span>{cur.symbol}</span><span>{cur.label}</span></div>
                     )}
                     </div>
                     : ''
                 }
+                
+                    
+                    {/* <div className={cl.body}>
+                    {this.props.currencies.map(cur => 
+                        <div className={cl.item} key={cur.symbol} onClick={(e) => this.handleClick(cur.symbol, e)}><span>{cur.symbol}</span><span>{cur.label}</span></div>
+                    )}
+                    </div> */}
+                    
+                
                 
             </div>
         );

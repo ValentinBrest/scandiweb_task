@@ -57,6 +57,12 @@ button.button {
     cursor: pointer;
 }
 
+button.button:active {
+    background-color: #5ECE7B;
+    opacity: .9;
+    border: 0;
+}
+
 .button__plus, .button__minus {
     width: 100%;
     height: 100%;
@@ -110,6 +116,11 @@ button.button {
     background: transparent;
     font-size: 25px;
     cursor: pointer;
+    transition: all .3s;
+}
+
+.button__delete:hover {
+    filter: invert(78%) sepia(18%) saturate(1148%) hue-rotate(81deg) brightness(88%) contrast(91%);
 }
 
 
@@ -138,5 +149,5 @@ button.button {
 }
 
 .arrow_left:hover, .arrow_right:hover {
-    filter: invert(80%) sepia(11%) saturate(1880%) hue-rotate(80deg) brightness(89%) contrast(87%);
+    filter: invert(78%) sepia(18%) saturate(1148%) hue-rotate(81deg) brightness(88%) contrast(91%);
 }

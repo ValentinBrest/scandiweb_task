@@ -9,3 +9,7 @@
     line-height: 120%;
     font-weight: 600;
 }
+
+.button:hover {
+    opacity: 0.85;
+}

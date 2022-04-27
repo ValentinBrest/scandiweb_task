@@ -52,7 +52,6 @@ class Product extends Component {
         const {data = {}} = this.props;
         const {product = {}} = data
         const {gallery = [], attributes = []} = product;
-        const description = convertInHTML(product.description)
         return (
             <div className="container">
                 <div className={cl.product__wrap}>
@@ -104,8 +103,7 @@ class Product extends Component {
                                 } 
                             </div>                       
                                           
-                            {/* <button className={cl.button} 
-                            onClick={() => this.addToCart(product.brand, product.name,this.props.symbol, product.prices, gallery, attributes)}>ADD TO CART</button> */}
+                            
 
                                               
                             <div className={cl.descr} dangerouslySetInnerHTML={{__html: product.description}}></div>

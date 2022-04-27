@@ -57,6 +57,13 @@ button.button {
     background-color: transparent;
     padding: 0;
     cursor: pointer;
+    transition: all .3s;
+}
+
+button.button:active {
+    background-color: #5ECE7B;
+    opacity: .9;
+    border: 0;
 }
 
 .button__plus, .button__minus {
@@ -112,6 +119,11 @@ button.button {
     background: transparent;
     font-size: 35px;
     cursor: pointer;
+    transition: all .3s;
+}
+
+.button__delete:hover {
+    filter: invert(78%) sepia(18%) saturate(1148%) hue-rotate(81deg) brightness(88%) contrast(91%);
 }
 
 .img__block {
@@ -140,5 +152,5 @@ button.button {
 }
 
 .arrow_left:hover, .arrow_right:hover {
-    filter: invert(80%) sepia(11%) saturate(1880%) hue-rotate(80deg) brightness(89%) contrast(87%);
+    filter: invert(78%) sepia(18%) saturate(1148%) hue-rotate(81deg) brightness(88%) contrast(91%);
 }

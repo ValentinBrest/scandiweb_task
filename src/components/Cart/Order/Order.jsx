@@ -13,12 +13,7 @@ class Order extends Component {
                         indexImg: 0
                     }
     }
-    // componentDidMount() {
-    //     let money = {}
-    //     this.props.price.forEach(cur => money[cur.currency.symbol] = cur.amount)
-    //     this.setState({...this.state, startPrice: money}, () => {})
-    // }
-
+    
     increment = () => {
         let money = {}
         let count = this.state.count + 1
@@ -27,7 +22,7 @@ class Order extends Component {
         this.setState({...this.state, count: count, price: money}, () => {
             this.props.addInCounters(this.state.count, this.props.index, money)
         })
-        console.log(this.props.index);
+        
     }
     
     decrement = () => {
@@ -58,8 +53,6 @@ class Order extends Component {
                     ? this.props.gallery.length-1
                     : this.state.indexImg + 1 
 
-        console.log(indexImg);
-        
         this.setState({...this.state,
             mainImg: this.props.gallery[indexImg],
             indexImg: indexImg

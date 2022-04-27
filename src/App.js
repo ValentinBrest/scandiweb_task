@@ -23,9 +23,7 @@ class App extends Component {
   
   openMinibag = (isMinibagOpen) => {
     let totalAmount = this.sumSalaries(this.state.totalPrice, this.state.symbol)
-	  this.setState({...this.state, isMinibagOpen: isMinibagOpen, totalAmount: totalAmount}, () => {
-      console.log(this.state)
-    })
+	  this.setState({...this.state, isMinibagOpen: isMinibagOpen, totalAmount: totalAmount}, () => {})
   } 
 
   giveToCart = (order) => {
