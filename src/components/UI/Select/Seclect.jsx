@@ -12,20 +12,24 @@ class Seclect extends Component {
 
     // componentDidMount() {
     //     document.addEventListener('mousedown', this.closeSelect);
+    //     console.log('didmount');
     //   }
     
     // componentWillUnmount() {
-    // document.removeEventListener('mousedown', this.closeSelect);
+    //     document.removeEventListener('mousedown', this.closeSelect);
+    //     console.log('willunmount');
     // }
+
 
     handleClick = (symbol) => {
         this.props.getCurrency(symbol)
         this.toggleSelect(false)
+        console.log('ffff');
     }
 
-    // closeSelect = () => {
-    //     this.setState({isSelectOpen: false})
-    // }
+    closeSelect = () => {
+        this.setState({isSelectOpen: false})
+    }
 
     render() {
         return (

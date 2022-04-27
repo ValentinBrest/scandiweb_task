@@ -97,9 +97,9 @@ button.button {
     line-height: 160%;
 }
 
-.img img {
+.img__block img {
     width: 141px;
-    margin-left: 12px;
+    
 }
 
 .button__delete {
@@ -114,3 +114,31 @@ button.button {
     cursor: pointer;
 }
 
+.img__block {
+    position: relative;
+    margin-left: 12px;
+}
+
+.arrow_left, .arrow_right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+.arrow_left{
+    left: 0;
+    background: url('./../../../assets/icons/left.svg') no-repeat center;
+}
+
+.arrow_right {
+    right: 0;
+    background: url('./../../../assets/icons/right.svg') no-repeat center; 
+}
+
+.arrow_left:hover, .arrow_right:hover {
+    filter: invert(80%) sepia(11%) saturate(1880%) hue-rotate(80deg) brightness(89%) contrast(87%);
+}

@@ -60,7 +60,7 @@ class Product extends Component {
                 <div className={cl.product__wrap}>
 
                     <div className={cl.product__galery}>
-                    {gallery.map((img, index) => (
+                        {gallery.map((img, index) => (
                           <img key={index} src={img} alt="photo" className={cl.img__item} onClick={(e)=> this.changeImg(img, e)}/>  
                         ))}
                     </div>

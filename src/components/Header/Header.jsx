@@ -42,11 +42,7 @@ class Header extends Component {
                     </ul>
 
                     <div className={cl.wrap}>
-                        {/* <select name="currency"  className={cl.currency} onChange={(e) => this.handleClick(e)}>
-                            {currencies.map(cur => (
-                                <option key={cur.symbol} value={cur.symbol} className={cl.option} >{cur.symbol}</option>
-                            ))}
-                        </select> */}
+                        
                         <Seclect currencies={currencies} getCurrency={this.props.getCurrency} symbol={this.props.symbol}/>
                         {/* <NavLink to='/cart' className={cl.cart} >
                             {this.props.totalProd > 0? <div className={cl.prod__total}>{this.props.totalProd}</div>: ''}

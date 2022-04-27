@@ -22,48 +22,59 @@ class App extends Component {
   }
   
   openMinibag = (isMinibagOpen) => {
-    let totalAmount = this.sumSalaries(this.state.totalPrice)
+    let totalAmount = this.sumSalaries(this.state.totalPrice, this.state.symbol)
 	  this.setState({...this.state, isMinibagOpen: isMinibagOpen, totalAmount: totalAmount}, () => {})
   } 
 
   giveToCart = (order) => {
+    let money = {}
+    order.price.forEach(cur => money[cur.currency.symbol] = cur.amount)
+
 	  this.setState({...this.state, 
                     orders: [...this.state.orders, order], 
                     totalProd: (this.state.totalProd + 1), 
                     counters: {...this.state.counters, [this.state.orders.length]: 1},
-                    totalPrice: {...this.state.totalPrice, [this.state.orders.length]: order.price.filter(cur => cur.currency.symbol == this.state.symbol)[0].amount}
+                    totalPrice: {...this.state.totalPrice, [this.state.orders.length]: money}
         }, () => {})
   } 
 
 
   getCurrency = (symbol) => {
     this.setState({...this.state, symbol},() => {
+      let totalAmount = this.sumSalaries(this.state.totalPrice, this.state.symbol)
+      this.setState({...this.state, totalAmount: totalAmount}, () => {})
     })
 }
   addInCounters = (counter, index, price) => {
     this.setState({...this.state, 
                   counters: {...this.state.counters, [index]: counter}, 
-                  totalPrice: {...this.state.totalPrice, [index]: price},
-                  
-                }, () => {this.setState({totalAmount: this.sumSalaries(this.state.totalPrice)}, () => {})})
+                  totalPrice: {...this.state.totalPrice, [index]: price},},
+    () => {this.setState({totalAmount: this.sumSalaries(this.state.totalPrice, this.state.symbol)}, () => {})})
   }
 
   updateOrders = (index, price) => {
           this.state.orders.splice(index, 1, null)
           delete this.state.counters[index]
           delete this.state.totalPrice[index]
+          let totalAmount = this.sumSalaries({[index]: price}, this.state.symbol)
+          
           this.setState({...this.state, 
             orders: this.state.orders, 
             totalProd: (this.state.totalProd - 1), 
             counters: {...this.state.counters},
             totalPrice: {...this.state.totalPrice},
-            totalAmount: this.state.totalAmount - price
+            totalAmount: (this.state.totalAmount - totalAmount).toFixed(2)
       }, ()=>{})
   }
 
-  sumSalaries(salaries) {
-    return (Object.values(salaries).reduce((a, b) => a + b, 0)).toFixed(2)
+  sumSalaries(salaries, symbol) {
+    let sum = 0;
+    for (let salary of Object.values(salaries)) {
+      sum += salary[symbol];
+    }
+    return (sum).toFixed(2); 
   }
+
 
   render() {
     const {data = { }} = this.props
