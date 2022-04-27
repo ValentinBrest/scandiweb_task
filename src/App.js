@@ -24,7 +24,7 @@ class App extends Component {
   openMinibag = (isMinibagOpen) => {
     let totalAmount = this.sumSalaries(this.state.totalPrice, this.state.symbol)
 	  this.setState({...this.state, isMinibagOpen: isMinibagOpen, totalAmount: totalAmount}, () => {
-      
+      console.log(this.state)
     })
   } 
 
@@ -54,11 +54,11 @@ class App extends Component {
     () => {this.setState({totalAmount: this.sumSalaries(this.state.totalPrice, this.state.symbol)}, () => {})})
   }
 
-  updateOrders = (index, price) => {
+  updateOrders = (index) => {
           this.state.orders.splice(index, 1, null)
           delete this.state.counters[index]
+          let totalAmount = this.sumSalaries({[index]: this.state.totalPrice[index]}, this.state.symbol)
           delete this.state.totalPrice[index]
-          let totalAmount = this.sumSalaries({[index]: price}, this.state.symbol)
           
           this.setState({...this.state, 
             orders: this.state.orders, 

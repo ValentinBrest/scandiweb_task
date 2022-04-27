@@ -7,16 +7,17 @@ class Order extends Component {
     constructor(props){
         super(props)
         this.state = { count: this.props.count,
-                        price: {},
+                        startPrice: {},    
+                        price: null,
                         mainImg : null,
                         indexImg: 0
                     }
     }
-    componentDidMount() {
-        let money = {}
-        this.props.price.forEach(cur => money[cur.currency.symbol] = cur.amount)
-        this.setState({...this.state, price: money}, () => {})
-    }
+    // componentDidMount() {
+    //     let money = {}
+    //     this.props.price.forEach(cur => money[cur.currency.symbol] = cur.amount)
+    //     this.setState({...this.state, startPrice: money}, () => {})
+    // }
 
     increment = () => {
         let money = {}
@@ -24,8 +25,9 @@ class Order extends Component {
         this.props.price.forEach(cur => money[cur.currency.symbol] = count * cur.amount)
         
         this.setState({...this.state, count: count, price: money}, () => {
-            this.props.addInCounters(this.state.count, this.props.index, this.state.price)
+            this.props.addInCounters(this.state.count, this.props.index, money)
         })
+        console.log(this.props.index);
     }
     
     decrement = () => {
@@ -40,7 +42,7 @@ class Order extends Component {
     }
 
     deleteProduct = (index) => {
-        this.props.updateOrders(index, this.state.price)
+        this.props.updateOrders(index)
     }
     componentDidUpdate(prevProps) {
         if (this.props.count !== prevProps.count) {
