@@ -45,9 +45,7 @@ class Product extends Component {
             
         } else {
             this.setState({...this.state, validate: false})
-        }
-        
-        
+        } 
     }
 
     render() {

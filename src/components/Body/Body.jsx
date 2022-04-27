@@ -34,7 +34,13 @@ class Body extends Component {
                                         inStock={prod.inStock} 
                                         name={prod.name} 
                                         img={prod.gallery[0]}
-                                        price={prod.prices.filter(cur => cur.currency.symbol == this.props.symbol)[0]}>
+                                        price={prod.prices.filter(cur => cur.currency.symbol == this.props.symbol)[0]}
+                                        prices={prod.prices}
+                                        attr={prod.attributes}
+                                        giveToCart={this.props.giveToCart}
+                                        gallery = {prod.gallery}
+                                        symbol={this.props.symbol}
+                                        >
                                     </ProductList>
                                 ))
                         }

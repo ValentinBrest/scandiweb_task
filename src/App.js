@@ -23,7 +23,9 @@ class App extends Component {
   
   openMinibag = (isMinibagOpen) => {
     let totalAmount = this.sumSalaries(this.state.totalPrice, this.state.symbol)
-	  this.setState({...this.state, isMinibagOpen: isMinibagOpen, totalAmount: totalAmount}, () => {})
+	  this.setState({...this.state, isMinibagOpen: isMinibagOpen, totalAmount: totalAmount}, () => {
+      
+    })
   } 
 
   giveToCart = (order) => {
@@ -95,7 +97,10 @@ class App extends Component {
         <Routes>
           {categories.map(route => ( 
             <>
-              <Route key={route.name} path={`${route.name}`} element={<Body symbol={this.state.symbol} />} />
+              <Route 
+                key={route.name} 
+                path={`${route.name}`} 
+                element={<Body symbol={this.state.symbol} giveToCart={this.giveToCart}/>} />
                 {route.products.map(item => (
                   <Route key={`${route.name}${item.id}`} 
                         path={`${route.name}/${item.id}`} 

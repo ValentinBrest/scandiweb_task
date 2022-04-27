@@ -9,6 +9,10 @@ query getProducts ($pic: String!) {
        brand
        inStock
        gallery
+       attributes{
+        id 
+      }
+      gallery
        prices{
          currency{
          label

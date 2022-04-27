@@ -44,9 +44,7 @@ class Header extends Component {
                     <div className={cl.wrap}>
                         
                         <Seclect currencies={currencies} getCurrency={this.props.getCurrency} symbol={this.props.symbol}/>
-                        {/* <NavLink to='/cart' className={cl.cart} >
-                            {this.props.totalProd > 0? <div className={cl.prod__total}>{this.props.totalProd}</div>: ''}
-                        </NavLink> */}
+                        
                         <div className={cl.cart}  onClick={() => this.switchMiniBag(true)}>
                             {this.props.totalProd > 0? <div className={cl.prod__total}>{this.props.totalProd}</div>: ''}
                         </div>
