@@ -6,6 +6,7 @@
     border-top: 1px solid var(--bg-color);
     padding: 20px 0;
     position: relative;
+    border-top: 1px solid #E5E5E5 ;
 }
 
 .left__info {
