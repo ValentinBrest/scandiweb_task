@@ -8,15 +8,16 @@ const StyledDiv = styled.div `
     
 `
 class Attribute extends Component {
-    constructor(props){
-        super(props)
+    getClassName = (classStyleName) => {
+        let miniBag = this.props.miniBagOrder
+        return miniBag ? mcl[classStyleName ]: cl[classStyleName]
     }
     render() {
-        let miniBag = this.props.miniBagOrder
+
         return (
-            <div className={miniBag? mcl.attr: cl.attr} >
-                <div className={miniBag? mcl.attr__title: cl.attr__title}>{this.props.name}:</div>
-                    <StyledDiv className={miniBag? mcl.attr__value: cl.attr__value} {...this.props}>
+            <div className={this.getClassName('attr')} >
+                <div className={this.getClassName('attr__title')}>{this.props.name}:</div>
+                    <StyledDiv className={this.getClassName('attr__value')} {...this.props}>
                         <span >{this.props.name === 'Color' ? '' : this.props.value}</span>
                     </StyledDiv>
             </div>

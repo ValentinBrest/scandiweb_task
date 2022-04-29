@@ -1,21 +1,12 @@
-import { graphql } from '@apollo/client/react/hoc';
 import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import compose from 'recompose/compose';
-import { useMatcher } from '../../hoc/useMatcher';
-import Header from '../Header/Header';
+import { graphql } from '@apollo/client/react/hoc';
+import { PRODUCTS_LIST } from './getProductList';
 import ProductList from './ProductList/ProductList';
 import cl from './Body.module.css';
-import { PRODUCTS_LIST } from './getProductList';
-
 
 class Body extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
-        const {data = {}, match = {}} = this.props;
+        const {data = {}} = this.props;
         const {category = {}} = data;
         const {products = []} = category;
         return (
@@ -25,24 +16,22 @@ class Body extends Component {
 
                     <div className={cl.body_wrap}>
                     
-                    {
-                        products.map( prod => (
-                                    <ProductList 
-                                        key={prod.name}
-                                        id={prod.id} 
-                                        brand={prod.brand} 
-                                        inStock={prod.inStock} 
-                                        name={prod.name} 
-                                        img={prod.gallery[0]}
-                                        price={prod.prices.filter(cur => cur.currency.symbol == this.props.symbol)[0]}
-                                        prices={prod.prices}
-                                        attr={prod.attributes}
-                                        giveToCart={this.props.giveToCart}
-                                        gallery = {prod.gallery}
-                                        symbol={this.props.symbol}
-                                        >
-                                    </ProductList>
-                                ))
+                        {products.map( prod => (
+                                        <ProductList 
+                                            key={prod.name}
+                                            id={prod.id} 
+                                            brand={prod.brand} 
+                                            inStock={prod.inStock} 
+                                            name={prod.name} 
+                                            img={prod.gallery[0]}
+                                            price={prod.prices.filter(cur => cur.currency.symbol === this.props.symbol)[0]}
+                                            prices={prod.prices}
+                                            attr={prod.attributes}
+                                            giveToCart={this.props.giveToCart}
+                                            gallery = {prod.gallery}
+                                            symbol={this.props.symbol}
+                                        />
+                                    ))
                         }
                         
                     </div>
@@ -54,13 +43,11 @@ class Body extends Component {
     }
 }
 
-
-export default compose(useMatcher,
+export default 
     graphql(PRODUCTS_LIST,{
         options: props => ({
           variables: { 
-            pic: props.match == null ? 'all': props.match.params.name,
-            
+            pic: props.name
           },
         }),
-      }))(Body);
+    })(Body);

@@ -20,6 +20,12 @@
 
 .img__item {
     cursor: pointer;
+    transition: all .3s;
+    border: 1px solid transparent;
+}
+
+.img__item:hover {
+    border: 1px solid var(--second-color);
 }
 
 .photo {

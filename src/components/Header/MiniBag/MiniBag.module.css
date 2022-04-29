@@ -4,7 +4,7 @@
     z-index: 21;
     right: 0;
     width: 325px;
-    background: #FFFFFF;
+    background: var(--bg-color);
     padding: 8px 16px 20px;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .button__view {
-    background: #FFFFFF;
-    color: #1D1F22;
-    border: 1px solid #1D1F22;
+    background: var(--bg-color);
+    color: var(--main-color);
+    border: 1px solid var(--main-color);
 }

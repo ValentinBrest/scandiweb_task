@@ -14,7 +14,7 @@
 .attr__value {
     width: 63px;
     height: 45px;
-    border: 1px solid #1D1F22;
+    border: 1px solid var(--main-color);
     position: relative;
     font-size: 16px;
 }

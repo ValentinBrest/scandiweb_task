@@ -3,7 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid #E5E5E5;
+    border-top: 1px solid var(--bg-color);
     padding: 20px 0;
     position: relative;
 }
@@ -53,15 +53,19 @@ button.button {
     font-family: 'Raleway', sans-serif;
     width: 45px;
     height: 45px;
-    border: 1px solid #1D1F22;
+    border: 1px solid var(--main-color);
     background-color: transparent;
     padding: 0;
     cursor: pointer;
     transition: all .3s;
 }
 
+button.button:hover {
+    background-color: var(--second-color);
+}
+
 button.button:active {
-    background-color: #5ECE7B;
+    background-color: var(--second-color);
     opacity: .9;
     border: 0;
 }
@@ -76,7 +80,7 @@ button.button:active {
     content: "";
     width: 15px;
     height: 1px;
-    background-color: #1D1F22;
+    background-color: var(--main-color);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -86,7 +90,7 @@ button.button:active {
     content: "";
     width: 1px;
     height: 15px;
-    background-color: #1D1F22;
+    background-color: var(--main-color);
     position: absolute;
     top: 50%;
     left: 50%;

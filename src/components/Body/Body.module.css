@@ -15,9 +15,9 @@
 
 .body_wrap {
     display: grid;
-    grid-template-columns: repeat(3, 386px);
+    grid-template-columns: repeat(auto-fit, 386px);
     grid-template-rows: 444px;
     grid-auto-rows: 444px;
-    justify-content: space-between;
     row-gap: 100px;
+    column-gap: 40px;
 }

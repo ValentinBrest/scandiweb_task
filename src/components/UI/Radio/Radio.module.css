@@ -18,7 +18,8 @@
     display: inline-block;
     width: 63px;
     height: 45px;
-    border: 1px solid #1D1F22;
+    border: 1px solid var(--main-color);
+    transition: all .3s;
   }
 
    /* стили при наведении курсора на радио */
@@ -41,29 +42,18 @@
     border-color: #A6A6A6;
   }
 
-  /* стили для радиокнопки, находящейся в фокусе */
-  .custom__color_radio:focus+label::before {
-    box-shadow: 0 0 0 0.2rem #5ECE7B;
-  }
-
-  /* стили для радиокнопки, находящейся в фокусе и не находящейся в состоянии checked */
-  .custom__radio:focus:not(:checked)+label::before {
-    border-color: #5ECE7B;
-  }
-
   /* стили для радиокнопки, находящейся в состоянии checked */
   .custom__radio:checked+label::before {
-    border-color: #1D1F22;
-    background-color: #1D1F22;
+    border-color: var(--main-color);
+    background-color: var(--main-color);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   .custom__color_radio:checked+label::before {
-    box-shadow: 0 0 0 0.2rem #5ECE7B;
-    border-color: #1D1F22;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.75);
+    border-color: transparent;
     background-color: transparent;
   }
-
-  
 
   .custom__radio:checked+label span{
       color: white;
