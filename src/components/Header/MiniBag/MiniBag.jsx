@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { NavLink } from "react-router-dom";
 import Order from "../../Cart/Order/Order";
 import Button from "../../UI/Button/Button";
@@ -48,7 +48,7 @@ class Minibag extends Component {
 									index={index}
 									updateOrders={this.props.updateOrders}
 							/>
-							: <></>
+							: <Fragment key={index}></Fragment>
 						);
 					})}
 				</div>

@@ -6,6 +6,7 @@ import Body from "./components/Body/Body";
 import Cart from "./components/Cart/Cart";
 import Header from "./components/Header/Header";
 import Product from "./components/Product/Product";
+import StartPage from "./components/StartPage/StartPage";
 
 class App extends Component {
 	constructor(props) {
@@ -117,6 +118,7 @@ class App extends Component {
 					totalAmount={this.state.totalAmount}
 				/>
 				<Routes>
+					<Route path="*" element={<StartPage/>} />
 					{categories.map((route) => (
 						<Fragment key={route.name}>
 							<Route
@@ -136,7 +138,7 @@ class App extends Component {
 							))}
 						</Fragment>
 					))}
-					<Route 	path="cart" 
+					<Route path="cart" 
 							element={<Cart  orders={this.state.orders}
 														symbol={this.state.symbol}
 														counters={this.state.counters}

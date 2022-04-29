@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import cl from "./Cart.module.css";
 import Order from "./Order/Order";
 
@@ -24,7 +24,7 @@ class Cart extends Component {
 								index={index}
 								updateOrders={this.props.updateOrders}
 							/>
-							: <></>
+							: <Fragment key={index}></Fragment>
 						);
 				})}
 			</div>
