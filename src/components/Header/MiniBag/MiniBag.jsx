@@ -43,10 +43,10 @@ class Minibag extends Component {
 									attr={order.attr}
 									gallery={order.gallery}
 									miniBagOrder={this.state.miniBagOrder}
-									count={this.props.counters[index]}
+									count={this.props.counters[order.id]}
 									addInCounters={this.props.addInCounters}
-									index={index}
 									updateOrders={this.props.updateOrders}
+									id={order.id}
 							/>
 							: <Fragment key={index}></Fragment>
 						);

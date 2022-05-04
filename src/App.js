@@ -35,24 +35,55 @@ class App extends Component {
 	};
 
 	giveToCart = (order) => {
-		let money = {};
-		order.price.forEach((cur) => (money[cur.currency.symbol] = cur.amount));
-
-		this.setState(
-			{
-				...this.state,
-				orders: [...this.state.orders, order],
-				totalProd: this.state.totalProd + 1,
-				counters: {
-					...this.state.counters,
-					[this.state.orders.length]: 1,
-				},
-				totalPrice: {
-					...this.state.totalPrice,
-					[this.state.orders.length]: money,
-				},
+		
+		
+		let hasProduct = false
+		
+		for (let i = 0 ; i < this.state.orders.length; i++){
+			if(this.state.orders.length) {
+				if ( (this.state.orders[i].id === order.id)) {
+					hasProduct = true
+				}
 			}
-		);
+			
+		}
+		if (!hasProduct) {
+			let money = {};
+			order.price.forEach((cur) => (money[cur.currency.symbol] = cur.amount));
+			this.setState(
+				{
+					...this.state,
+					orders: [...this.state.orders, order],
+					totalProd: this.state.totalProd + 1,
+					counters: {
+						...this.state.counters,
+						[order.id]: 1,
+					},
+					totalPrice: {
+						...this.state.totalPrice,
+						[order.id]: money,
+					}
+				}
+			);
+		} else {
+			let money = {};
+			let count = this.state.counters[order.id] + 1
+			order.price.forEach((cur) => (money[cur.currency.symbol] = count * cur.amount));
+			this.setState(
+				{
+					...this.state,
+					counters: {
+						...this.state.counters,
+						[order.id]: this.state.counters[order.id] + 1,
+					},
+					totalPrice: {
+						...this.state.totalPrice,
+						[order.id]: money,
+					},
+				}
+			);
+		}
+		
 	};
 
 	getCurrency = (symbol) => {
@@ -75,11 +106,17 @@ class App extends Component {
 		);
 	};
 
-	updateOrders = (index) => {
-		this.state.orders.splice(index, 1, null);
-		delete this.state.counters[index];
-		let totalAmount = this.sumSalaries({[index]: this.state.totalPrice[index] }, this.state.symbol);
-		delete this.state.totalPrice[index];
+	updateOrders = (id) => {
+		let index = ''
+		for (let i = 0; i < this.state.orders.length; i++) {
+			if (this.state.orders[i].id === id) {
+				index = i
+			}
+		}
+		this.state.orders.splice(index, 1);
+		delete this.state.counters[id];
+		let totalAmount = this.sumSalaries({[id]: this.state.totalPrice[id] }, this.state.symbol);
+		delete this.state.totalPrice[id];
 
 		this.setState(
 			{	...this.state,
@@ -99,53 +136,59 @@ class App extends Component {
 		}
 		return sum.toFixed(2);
 	}
+	
 
 	render() {
 		const { data = {} } = this.props;
-		const { categories = [] } = data;
+		const { categories = [], currencies = [] } = data;
 		return (
 			<div className="App">
-				<Header
-					getCurrency={this.getCurrency}
-					totalProd={this.state.totalProd}
-					orders={this.state.orders}
-					symbol={this.state.symbol}
-					isMinibagOpen={this.state.isMinibagOpen}
-					openMinibag={this.openMinibag}
-					counters={this.state.counters}
-					addInCounters={this.addInCounters}
-					updateOrders={this.updateOrders}
-					totalAmount={this.state.totalAmount}
-				/>
+				
 				<Routes>
-					<Route path="*" element={<StartPage/>} />
-					{categories.map((route) => (
-						<Fragment key={route.name}>
-							<Route
-								path={`${route.name}`}
-								element={<Body symbol={this.state.symbol} giveToCart={this.giveToCart} name={`${route.name}`}/>}
-							/>
-							{route.products.map((item) => (
-								<Route  key={`${route.name}${item.id}`}
-										path={`${route.name}/${item.id}`}
+					<Route path="/" element={<Header getCurrency={this.getCurrency}
+													totalProd={this.state.totalProd}
+													orders={this.state.orders}
+													symbol={this.state.symbol}
+													isMinibagOpen={this.state.isMinibagOpen}
+													openMinibag={this.openMinibag}
+													counters={this.state.counters}
+													addInCounters={this.addInCounters}
+													updateOrders={this.updateOrders}
+													totalAmount={this.state.totalAmount}
+													categories={categories}
+													currencies={currencies}
+												/>}
+					>
+						<Route path="*" element={<StartPage/>} />
+						{categories.map((route) => (
+							<Fragment key={route.name}>
+								<Route
+									path={`${route.name}/*`}
+									element={<Body symbol={this.state.symbol} 
+													giveToCart={this.giveToCart} 
+													name={`${route.name}`} 
+													route={route}
+											/>}
+								/>
+								<Route  path={`${route.name}/:id`}
 										element={ <Product
-													id={item.id}
 													symbol={this.state.symbol}
 													giveToCart={this.giveToCart}
 												/>
 										}
 								/>
-							))}
-						</Fragment>
-					))}
-					<Route path="cart" 
-							element={<Cart  orders={this.state.orders}
-														symbol={this.state.symbol}
-														counters={this.state.counters}
-														addInCounters={this.addInCounters}
-														updateOrders={this.updateOrders}
-									/>}
-					/>
+							</Fragment>
+						))}
+						
+						<Route path="cart" 
+								element={<Cart  orders={this.state.orders}
+												symbol={this.state.symbol}
+												counters={this.state.counters}
+												addInCounters={this.addInCounters}
+												updateOrders={this.updateOrders}
+										/>}
+						/>
+					</Route>
 				</Routes>
 			</div>
 		);

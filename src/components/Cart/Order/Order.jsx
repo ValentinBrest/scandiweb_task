@@ -27,7 +27,7 @@ class Order extends Component {
 		this.props.price.forEach((cur) => (money[cur.currency.symbol] = count * cur.amount));
 
 		this.setState({ ...this.state, count: count, price: money }, () => {
-			this.props.addInCounters(this.state.count, this.props.index, money);
+			this.props.addInCounters(this.state.count, this.props.id, money);
 		});
 	};
 
@@ -37,13 +37,13 @@ class Order extends Component {
 		if (this.state.count > 1) {
 			this.props.price.forEach((cur) => (money[cur.currency.symbol] = count * cur.amount));
 			this.setState({ ...this.state, count: count, price: money }, () => {
-				this.props.addInCounters(this.state.count, this.props.index, money);
+				this.props.addInCounters(this.state.count, this.props.id, money);
 			});
 		}
 	};
 
-	deleteProduct = (index) => {
-		this.props.updateOrders(index);
+	deleteProduct = (id) => {
+		this.props.updateOrders(id);
 	};
 
 	changeImg(where) {
@@ -110,7 +110,7 @@ class Order extends Component {
 						<img src={imgSrc} alt="photos" />
 					</div>
 				</div>
-				<button className={this.getClassName('button__delete')} onClick={() => this.deleteProduct(this.props.index)}>
+				<button className={this.getClassName('button__delete')} onClick={() => this.deleteProduct(this.props.id)}>
 					&times;
 				</button>
 			</div>

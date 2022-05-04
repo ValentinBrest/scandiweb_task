@@ -5,7 +5,7 @@ import Attribute from './../Attribtute/Attribute';
 class MinibagOrder extends Component {
     constructor(props){
         super(props)
-        this.state = { count: 1}
+        this.state = { count: this.props.count}
     }
     increment = () => this.setState({...this.state, count: this.state.count + 1})
 

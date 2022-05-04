@@ -1,10 +1,14 @@
 .order__wrap {
-    width: 100%;
+    width: 270px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     margin-bottom: 42px;
+}
+
+.order__wrap:last-child {
+    margin-bottom: 0px;
 }
 
 .brand {
@@ -37,6 +41,7 @@
     height: 137px;
     width: 145px;
     align-items: center;
+    padding-left: 5px;
 }
 
 .button__wrap {
@@ -113,9 +118,9 @@ button.button:active {
 
 .button__delete {
     position: absolute;
-    right: -22px;
+    right: -21px;
     top: -8px;
-    width: 40px;
+    width: 26px;
     height: 40px;
     border: 0;
     background: transparent;
@@ -132,27 +137,4 @@ button.button:active {
 .img__block {
     position: relative;
     margin-left: 10px;
-}
-
-.arrow_left, .arrow_right {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-}
-
-.arrow_left{
-    left: 0;
-    background: url('./../../../assets/icons/left.svg') no-repeat center;
-}
-
-.arrow_right {
-    right: 0;
-    background: url('./../../../assets/icons/right.svg') no-repeat center; 
-}
-
-.arrow_left:hover, .arrow_right:hover {
-    filter: invert(78%) sepia(18%) saturate(1148%) hue-rotate(81deg) brightness(88%) contrast(91%);
 }

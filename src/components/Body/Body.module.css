@@ -7,10 +7,11 @@
 .title {
     font-size: 42px;
     line-height: 160%;
-    font-weight: 400;
+    font-weight: 800;
     padding-top: 80px;
     padding-bottom: 103px;
     margin: 0;
+    text-transform: uppercase;
 }
 
 .body_wrap {

@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
 import { graphql } from '@apollo/client/react/hoc';
+import React, { Component } from 'react';
+import { Outlet, Route, Routes } from 'react-router-dom';
+import Product from '../Product/Product';
+import cl from './Body.module.css';
 import { PRODUCTS_LIST } from './getProductList';
 import ProductList from './ProductList/ProductList';
-import cl from './Body.module.css';
 
 class Body extends Component {
     render() {
@@ -10,9 +12,24 @@ class Body extends Component {
         const {category = {}} = data;
         const {products = []} = category;
         return (
-            <div className={cl.wrapper}>
+            <>
+                {/* <Routes>
+                    {products.map((item) => (
+                        <Route  key={`${item.name}${item.id}`}
+                                path={`:${item.id}`}
+                                element={ <Product
+                                            id={item.id}
+                                            symbol={this.props.symbol}
+                                            giveToCart={this.props.giveToCart}
+                                        />
+                                }
+                        />
+                    ))}
+                </Routes> */}
+                <div className={cl.wrapper}>
+                
                 <div className="container">
-                    <h1 className={cl.title}>Category name</h1>
+                    <h1 className={cl.title}>{this.props.name}</h1>
 
                     <div className={cl.body_wrap}>
                     
@@ -38,6 +55,8 @@ class Body extends Component {
                 </div>
                 
             </div>
+            </>
+            
             
         );
     }

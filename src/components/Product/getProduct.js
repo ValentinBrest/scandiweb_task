@@ -6,6 +6,7 @@ query getProducts ($id: String!) {
     id
     name
     gallery
+    inStock
     description
     attributes{
       id

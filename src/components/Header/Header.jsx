@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { graphql } from "@apollo/client/react/hoc";
-import { CATEGORIES_CURRENCIES } from "./getCategoties";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Seclect from "../UI/Select/Seclect";
-import Minibag from "./MiniBag/MiniBag";
 import cl from "./Header.module.css";
+import Minibag from "./MiniBag/MiniBag";
 
 class Header extends Component {
 
@@ -13,8 +11,6 @@ class Header extends Component {
 	};
 
 	render() {
-		const { data = {} } = this.props;
-		const { categories = [], currencies = [] } = data;
 
 		return (
 			<>
@@ -22,7 +18,7 @@ class Header extends Component {
 					<div className="container">
 						<div className={cl.header__wrap}>
 							<ul className={cl.categoties}>
-								{categories.map((item) => (
+								{this.props.categories.map((item) => (
 									<li key={item.name} className={cl.categoties_item} >
 										<NavLink to={item.name}
                                                 className={({ isActive }) => isActive ? cl.link_active : "" }
@@ -35,7 +31,7 @@ class Header extends Component {
 							</ul>
 
 							<div className={cl.wrap}>
-								<Seclect currencies={currencies}
+								<Seclect currencies={this.props.currencies}
                                         getCurrency={this.props.getCurrency}
                                         symbol={this.props.symbol}
 								/>
@@ -70,9 +66,10 @@ class Header extends Component {
                     ? <div className={cl.overlay} onClick={() => this.switchMiniBag(false)} ></div>
                     : ""
                 }
+				<Outlet/>
 			</>
 		);
 	}
 }
 
-export default graphql(CATEGORIES_CURRENCIES)(Header);
+export default (Header);

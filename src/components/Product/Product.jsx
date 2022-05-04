@@ -4,6 +4,8 @@ import { PRODUCTS } from "./getProduct";
 import Button from "../UI/Button/Button";
 import Radio from "../UI/Radio/Radio";
 import cl from "./Product.module.css";
+import withRouter from "../../hoc/withRouter";
+import { compose} from 'recompose'
 
 class Product extends Component {
 	constructor(props) {
@@ -18,6 +20,12 @@ class Product extends Component {
 	}
 
 	addToCart = (brand, name, symbol, price, gallery, attributesAll) => {
+		let id = brand + name 
+		for (const key in this.state.attr) {
+			for (const ley in this.state.attr[key]) {
+				id = id + `${this.state.attr[key][ley]}`;
+			}
+		  }
 		if (Object.keys(this.state.attr).length === attributesAll.length) {
 			let order = {
 				name,
@@ -27,6 +35,7 @@ class Product extends Component {
 				attr: this.state.attr,
 				gallery,
 				attributesAll,
+				id: id
 			};
 			return this.props.giveToCart(order);
 		} else {
@@ -37,8 +46,9 @@ class Product extends Component {
 	render() {
 		const { data = {} } = this.props;
 		const { product = {} } = data;
-		const { gallery = [], attributes = [] } = product;
+		const { gallery = [], attributes = [], inStock='' } = product;
         let imgSrc = gallery? this.state.mainImg? this.state.mainImg: gallery[0]: "";
+		let disactive = !(inStock)? cl.button__disactive: ''
 		return (
 			<div className="container">
 				<div className={cl.product__wrap}>
@@ -91,14 +101,15 @@ class Product extends Component {
 							</div>
 
 							<div className={cl.validateBlock}>
-								<Button className={cl.button}
+								<Button className={`${cl.button} ${disactive}`}
 									    onClick={() => this.addToCart(
                                                                     product.brand,
                                                                     product.name,
                                                                     this.props.symbol,
                                                                     product.prices,
                                                                     gallery,
-                                                                    attributes)}
+                                                                    attributes,
+																	)}
 								>
 									ADD TO CART
 								</Button>
@@ -117,10 +128,16 @@ class Product extends Component {
 	}
 }
 
-export default graphql(PRODUCTS, {
-	options: (props) => ({
-		variables: {
-			id: props.id,
-		},
+export default 
+compose(
+	withRouter,
+	graphql(PRODUCTS, {
+		options: (props) => ({
+			variables: {
+				id: props.id.id,
+			},
+		}),
 	}),
-})(Product);
+	
+)
+(Product);

@@ -20,9 +20,9 @@ class Cart extends Component {
 								attr={order.attr}
 								gallery={order.gallery}
 								addInCounters={this.props.addInCounters}
-								count={this.props.counters[index]}
-								index={index}
+								count={this.props.counters[order.id]}
 								updateOrders={this.props.updateOrders}
+								id={order.id}
 							/>
 							: <Fragment key={index}></Fragment>
 						);
