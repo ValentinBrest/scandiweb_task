@@ -6,13 +6,12 @@
     border-top: 1px solid var(--bg-color);
     padding: 20px 0;
     position: relative;
-    border-top: 1px solid #E5E5E5 ;
+    border-top: 1px solid #e5e5e5;
 }
 
 .left__info {
     height: 100%;
-} 
-
+}
 
 .brand {
     font-weight: 600;
@@ -34,7 +33,6 @@
     padding: 12px 0;
     margin-bottom: 12px;
 }
-
 
 .right__info {
     display: flex;
@@ -58,7 +56,7 @@ button.button {
     background-color: transparent;
     padding: 0;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 button.button:hover {
@@ -67,18 +65,20 @@ button.button:hover {
 
 button.button:active {
     background-color: var(--second-color);
-    opacity: .9;
+    opacity: 0.9;
     border: 0;
 }
 
-.button__plus, .button__minus {
+.button__plus,
+.button__minus {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.button__plus::before, .button__minus:before {
-    content: "";
+.button__plus::before,
+.button__minus:before {
+    content: '';
     width: 15px;
     height: 1px;
     background-color: var(--main-color);
@@ -88,20 +88,20 @@ button.button:active {
 }
 
 .button__plus::after {
-    content: "";
+    content: '';
     width: 1px;
     height: 15px;
     background-color: var(--main-color);
     position: absolute;
     top: 50%;
     left: 50%;
-    
 }
 
-.button__plus::before, .button__plus::after, .button__minus::before {
+.button__plus::before,
+.button__plus::after,
+.button__minus::before {
     transform: translate(-50%, -50%);
 }
-
 
 .button__wrap span {
     font-weight: 500;
@@ -111,7 +111,6 @@ button.button:active {
 
 .img__block img {
     width: 141px;
-    
 }
 
 .button__delete {
@@ -124,7 +123,7 @@ button.button:active {
     background: transparent;
     font-size: 35px;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
 .button__delete:hover {
@@ -136,28 +135,30 @@ button.button:active {
     margin-left: 12px;
 }
 
-.arrow_left, .arrow_right {
+.arrow_left,
+.arrow_right {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
 }
 
-.arrow_left{
+.arrow_left {
     left: 0;
     background: url('./../../../assets/icons/left.svg') no-repeat center;
-    filter: drop-shadow( 1px 1px 2px rgb(0, 0, 0));
+    filter: drop-shadow(1px 1px 2px rgb(0, 0, 0));
 }
 
 .arrow_right {
     right: 0;
-    background: url('./../../../assets/icons/right.svg') no-repeat center; 
-    filter: drop-shadow( 1px 1px 2px rgb(0, 0, 0));
+    background: url('./../../../assets/icons/right.svg') no-repeat center;
+    filter: drop-shadow(1px 1px 2px rgb(0, 0, 0));
 }
 
-.arrow_left:hover, .arrow_right:hover {
+.arrow_left:hover,
+.arrow_right:hover {
     filter: invert(78%) sepia(18%) saturate(1148%) hue-rotate(81deg) brightness(88%) contrast(91%);
 }
