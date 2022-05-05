@@ -5,13 +5,24 @@ import Button from "../UI/Button/Button";
 import Radio from "../UI/Radio/Radio";
 import cl from "./Product.module.css";
 import withRouter from "../../hoc/withRouter";
-import { compose} from 'recompose'
+import { compose } from 'recompose';
 
 class Product extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { mainImg: null, attr: {}, isAddedProduct: false };
+		this.state = { mainImg: null, attr: {}, isAddedProduct: false};
+		this.descr = React.createRef()
 	}
+	componentDidMount() {
+		let description = this.props.data.product ? this.props.data.product.description: ''
+		this.descr.current.innerHTML = description
+	}
+	componentDidUpdate(prevProps) {
+		if (this.props.data !== prevProps.data) {
+			this.descr.current.innerHTML = this.props.data.product.description
+		}
+	}
+	
 
 	changeImg = (img) => {this.setState({mainImg: img})}
 
@@ -119,7 +130,7 @@ class Product extends Component {
 								}
 							</div>
 
-							<div className={cl.descr} dangerouslySetInnerHTML={{__html: product.description,}}></div>
+							<div className={cl.descr} ref={this.descr}></div>
 						</div>
 					</div>
 				</div>
