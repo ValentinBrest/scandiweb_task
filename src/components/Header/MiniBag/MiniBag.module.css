@@ -5,7 +5,7 @@
     right: 0;
     width: 325px;
     background: var(--bg-color);
-    padding: 8px 16px 20px;
+    padding: 8px 0px 20px 16px;
 }
 
 .title {
@@ -15,7 +15,9 @@
 .total {
     display: flex;
     justify-content: space-between;
+    padding-top: 42px;
     padding-bottom: 35px;
+    margin-right: 16px;
 }
 
 .total span {
@@ -24,9 +26,15 @@
     line-height: 18px;
 }
 
+.bag_prod {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
 .button__wrap {
     display: flex;
     justify-content: space-between;
+    margin-right: 16px;
 }
 
 .button {
