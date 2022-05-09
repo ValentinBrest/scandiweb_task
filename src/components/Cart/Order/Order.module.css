@@ -1,5 +1,4 @@
 .order__wrap {
-    width: 1100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -161,4 +160,8 @@ button.button:active {
 .arrow_left:hover,
 .arrow_right:hover {
     filter: invert(78%) sepia(18%) saturate(1148%) hue-rotate(81deg) brightness(88%) contrast(91%);
+}
+
+.attr__wrap {
+    display: inline-block;
 }
