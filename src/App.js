@@ -144,6 +144,7 @@ class App extends Component {
                         }
                     >
                         <Route index element={<Navigate to="all" />} />
+                        <Route path='*' element={<Navigate to="all" />} />
                         {categories.map((route) => (
                             <Fragment key={route.name}>
                                 <Route
