@@ -1,12 +1,11 @@
-import React, { Component, Fragment } from 'react';
 import { graphql } from '@apollo/client/react/hoc';
-import { CATEGORIES_CURRENCIES } from './components/Header/getCategoties';
-import { Route, Routes } from 'react-router-dom';
+import React, { Component, Fragment } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Body from './components/Body/Body';
 import Cart from './components/Cart/Cart';
+import { CATEGORIES_CURRENCIES } from './components/Header/getCategoties';
 import Header from './components/Header/Header';
 import Product from './components/Product/Product';
-import StartPage from './components/StartPage/StartPage';
 
 class App extends Component {
     constructor(props) {
@@ -144,17 +143,16 @@ class App extends Component {
                             />
                         }
                     >
-                        <Route path="*" element={<StartPage />} />
+                        <Route index element={<Navigate to="all" />} />
                         {categories.map((route) => (
                             <Fragment key={route.name}>
                                 <Route
-                                    path={`${route.name}/*`}
+                                    path={`${route.name}/*`}  
                                     element={
                                         <Body
                                             symbol={this.state.symbol}
                                             giveToCart={this.giveToCart}
                                             name={`${route.name}`}
-                                            route={route}
                                         />
                                     }
                                 />
